@@ -88,7 +88,7 @@ namespace CollectionSample
                 }
                 // pause program.
                 Console.WriteLine("\nPress any key to continue...");
-                Console.ReadKey();
+                //Console.ReadKey();
                 Console.Clear();
 
                 /*******************************************************
@@ -100,13 +100,28 @@ namespace CollectionSample
                  ********************************************************/
 
                 // Create a new points map and add some entries
-                
+                PointMap myMap = new PointMap();
+                myMap.Add("Home", new CartesianPoint(99, 99));
+                myMap.Add("School", new CartesianPoint(45, 3));
+                myMap.Add("Work", new CartesianPoint(95, 9));
+
                 // Show the entries (foreach loop - inherited functionality from DictionaryBase)
-                
+                Console.WriteLine("\nAfter adding, here are the entries stored in myMap");
+                Console.WriteLine("\nKEY        VALUE\n=================");
+                foreach (DictionaryEntry entry in myMap)
+                {
+                    Console.WriteLine("{0}{1}", entry.Key.ToString().PadRight(10), entry.Value);
+                }
                 // Change one of the entries (uses Indexer)
-                
+                myMap["Home"] = new CartesianPoint(0, 0);
+
                 // Show the entries (foreach loop using Keys property)
-                
+                Console.WriteLine("\nAfter editing, here are the entries stored in myMap");
+                Console.WriteLine("\nKEY        VALUE\n=================");
+                foreach (string key in myMap.Keys)
+                {
+                    Console.WriteLine("{0}{1}", key.PadRight(10), myMap[key]);
+                }
                 // pause program.
                 Console.WriteLine("\nPress any key to continue...");
                 //Console.ReadKey();
@@ -115,16 +130,26 @@ namespace CollectionSample
                 /*******************************************************
                  * Part 4 - Cloning:
                  ********************************************************/
-                 // A new key
-
-                 // mySecondMap is a reference to myMap
-                 // mySecondMap is a copy of myMap
-                 // mySecondMap is clone (copy) of myMap
-
-                 // Adding to mySecondMap
-
+                // A new key
+                string pub = "Pub";
+                // mySecondMap is a reference to myMap
+                //PointMap mySecondMap = myMap;
+                // mySecondMap is a copy of myMap
+                //PointMap mySecondMap = new PointMap(myMap);
+                // mySecondMap is clone (copy) of myMap
+                PointMap mySecondMap = myMap.Clone() as PointMap;
+                // Adding to mySecondMap
+                mySecondMap.Add(pub, new CartesianPoint(88, 88));
                 // Does myMap contain the new key?
-                
+                Console.WriteLine("AFter modifaication of mySecondMap, myMap {0} contains \"{1}\".",
+                myMap.Contains(pub) ? "does" : "does not", pub);
+
+                Console.WriteLine("\nAll entries in myMap");
+                Console.WriteLine("\nKEY        VALUE\n=================");
+                foreach (string key in myMap.Keys)
+                {
+                    Console.WriteLine("{0}{1}", key.PadRight(10), myMap[key]);
+                }
                 // pause program.
                 Console.WriteLine("\nPress any key to continue...");
                 //Console.ReadKey();
@@ -134,16 +159,28 @@ namespace CollectionSample
                  * Part 5 - Deep Copying:
                  ********************************************************/
 
-                 // mySecondList is a reference to myList
-                 // mySecondList is a copy of myList
-                 // mySecondList is a ' deep clone' of myList
+                // mySecondList is a reference to myList
+                //PointList mySecondList = myList;
+                // mySecondList is a copy of myList
+                //PointList mySecondList = new PointList(myList);
+                // mySecondList is a ' deep clone' of myList
+                PointList mySecondList = PointList.DeepClone(myList);
 
-                 // Create a new point
-                 // Adding to mySecondList
+                // Create a new point
+                CartesianPoint newPoint = new CartesianPoint(88, 99);
+                // Adding to mySecondList
+                mySecondList.Add(newPoint);
 
                 // Does myList contain the new point?
-                
-                
+                Console.WriteLine("\nAfter modding mySecondList, myList {0} contain {1}.",
+                    myList.Contains(newPoint) ? "does" : "does not", newPoint);
+
+                Console.WriteLine("\nCurrently stored in List: ");
+                for (int index = 0; index < myList.Count; index++)
+                {
+                    Console.WriteLine("\tmyList[{0}]: {1}", index, myList[index].ToString());
+                }
+
             }
             catch (Exception e)
             {

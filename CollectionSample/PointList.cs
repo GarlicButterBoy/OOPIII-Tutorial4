@@ -74,21 +74,37 @@ namespace CollectionSample
         /// <summary>
         /// Default constructor for empty PointList objects.
         /// </summary>
-        
+        public PointList() { }
 
         /// <summary>
         /// Constructor for copying PointList objects safely
         /// </summary>
         /// <remarks>Similair to a copy constructor in C++</remarks>
         /// <param name="sourceList"></param>
-        
+        public PointList(PointList sourceList)
+        {
+            foreach (CartesianPoint point in sourceList)
+            {
+                this.Add(CartesianPoint.ShallowClone(point));
+            }
+        }
 
         /// <summary>
         /// A practical alternative to supporting ICloneable.
         /// </summary>
         /// <param name="source">The point list we want to clone</param>
         /// <returns>A deep copy of the point list.</returns>
-        
+        public static PointList DeepClone(PointList sourceList)
+        {
+            PointList copyList = new PointList();
+
+            foreach (CartesianPoint point in sourceList)
+            {
+                copyList.Add(CartesianPoint.ShallowClone(point));
+            }
+
+            return copyList;
+        }
 
     }
 }

@@ -19,7 +19,7 @@ namespace CollectionSample
     /// The CartesianPoint class represents a point on a 2-D plane, designateded by two integer coordinates: X and Y.
     /// </summary>
     /// <see cref="https://en.wikipedia.org/wiki/Cartesian_coordinate_system"/>
-    public class CartesianPoint
+    public class CartesianPoint : ICloneable
     {
 
         #region TUTORIAL 2 
@@ -170,14 +170,21 @@ namespace CollectionSample
         /// <returns>A shallow copy of the object.</returns>
         /// <remarks>Some programmers disagree with implementing ICloneable because there is no way to determine if the copy/clone is shallow or deep. See ref.</remarks>
         /// <see cref="http://blogs.msdn.com/b/brada/archive/2003/04/09/49935.aspx"/>
-        
+        public object Clone()
+        {
+            return this.MemberwiseClone();
+
+        }
 
         /// <summary>
         /// A practical alternative to supporting ICloneable.
         /// </summary>
         /// <param name="source">The point we want to clone</param>
         /// <returns>A shallow copy of the point.</returns>
-        
+        public static CartesianPoint ShallowClone(CartesianPoint source)
+        {
+            return source.MemberwiseClone() as CartesianPoint;
+        }
 
         #endregion
     }
