@@ -148,13 +148,21 @@ namespace CollectionSample
         /// An iterator method that supplies each of the values to be used in a foreach block in sequence.
         /// </summary>
         /// <returns>The x then y coordinates in sequence.</returns>
-        
+        public System.Collections.IEnumerable myCoordinates()
+        {
+            yield return X; //Returns x first
+            yield return Y; //Returns y next
+        }
 
         /// <summary>
         /// GetEnumerator(), An iterator method that supplies each of the values to be used in a foreach block in sequence. 
         /// </summary>
         /// <returns>The x then y coordinates in sequence.</returns>
-        
+        public System.Collections.IEnumerator GetEnumerator()
+        {
+            yield return X;
+            yield return Y;
+        }
 
         /// <summary>
         /// Implementing cloning functionality for the CartesianPoint class. Shallow copying is sufficient because CartesianPoint contains only value-type data.
